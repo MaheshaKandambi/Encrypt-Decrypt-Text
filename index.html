@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+            <meta http-equiv="content-Type" content="text/html"; charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Cryptography</title>
+<link rel="icon" href="https://www.thesslstore.com/blog/wp-content/uploads/2020/06/encryption-key-management-best-practices.jpg" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="Style.css">
+<script
+  src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
+
+    </head> 
+
+<body>
+    
+
+        
+        <h2>Encrypt & Decrypt Text Online</h2><br>
+        <h3>Protect your text by Encrypting and Decrypting any given text with a key that no one knows</h3>
+
+
+
+
+<div class="container">
+<img src="Area_IconTile_Sys_Security_1400x788_duo-655x368.png"  width ="950" height="1050">
+</div>
+<div class="centered">
+<div class="form"></div>
+
+<!-- <form> -->
+
+<p class="sty">Encryption</p>
+
+<p style="color:white;font-size:120%;font-weight:900">Simply enter your data then push the encrypt button.</p>
+
+<textarea id="enmsg" name="enmsg" rows="6" cols="50" placeholder="Type (or paste) here.."></textarea>
+<br><br>
+<button class="button" id="1">Encrypt</button><br><br>
+
+<p class="encrypted">Encrypted Text</p>
+
+<!-- </form> -->
+
+<div class="form"></div>
+
+<!-- <form> -->
+
+<textarea id="enmsg2" name="enmsg2" rows="6" cols="50" placeholder="Result goes here.." id="my input"></textarea>
+<br><br>
+
+<!-- </form>  -->
+<div class="form"></div>
+
+<form></form>
+    <p class="sty">Decryption</p>
+<p style="color:white;font-size:120%;font-weight:900">Simply enter your data then push the Decrypt button.</p>
+
+<textarea id="enmsg3" name="enmsg3" rows="6" cols="50" placeholder="Type (or paste) here.." id="my input"></textarea>
+<br><br>
+<button class="button" id="2">Decrypt</button><br><br>
+
+<p class="encrypted">Decrypted Text</p>
+
+
+
+<div class="form"></div>
+
+<form action="/action_page.php">
+
+<textarea id="enmsg4" name="enmsg4" rows="6" cols="50" placeholder="Result goes here.."></textarea>
+<br><br>
+
+</div>
+
+<div id="result"></div>
+
+
+
+
+
+
+</body>
+
+
+
+<script>
+    $(document).on('click', '.button', function() {
+     
+         var id = $(this).attr("id");
+         var msg=document.getElementById('enmsg').value;
+         
+
+         if(id=="1")
+         {
+
+
+          $.ajax({
+            url: "http://localhost:8089/encrypt?msg="+msg,
+            type:"GET",
+            success:function(data)
+			{
+				$('#enmsg2').val(data);
+                $('#enmsg3').val(data);
+			}
+
+        }).done(function (msg) 
+        { 
+            $("#display").text("server should have sent the result " + msg); 
+        })
+        .fail(function (msg) { $("#display").text("error with: " + msg); })
+        }
+        else if(id=="2")
+        {
+            var msg2=document.getElementById('enmsg3').value;
+            $.ajax({
+            url: "http://localhost:8089/decrypt?msg="+msg2,
+            type:"GET",
+            success:function(data)
+			{
+				$('#enmsg4').val(data);
+			}
+
+        }).done(function (msg2) 
+        { 
+            $("#display").text("server should have sent the result " + msg2); 
+        })
+        .fail(function (msg2) { $("#display").text("error with: " + msg2); })
+        }
+   
+   
+     });
+   
+   
+   
+     </script>
+
+
+</html>
